@@ -26,7 +26,7 @@ Implement:
 
 const tagDelimiterWithPeriod = />>\s*(\w+):?[\s]{0,3}([\w{}]*)?\.?[\s]{0,3}(\w*)?/giu
 const characterNamePattern = /^([A-Z]){3,}/u
-const extractNameFromValidLine = /^[+*\s-]*[({]?[\w\s]*[()]*[)}]?[*\s-]*([A-Z]{3,}):/u
+const extractNameFromValidLine = /^[+*\s-]*(?:<loc .*?>)*[({]?[\w\s]*[()]*[)}]?[*\s-]*([A-Z]{3,}):/u
 const checkForCommentedLine = /^\s*\/\//
 const checkForInlineLogic = /^[+*\s-]*\{[A-Z()]{3,}:(.*?)\}/iu
 
@@ -59,20 +59,6 @@ let charTagsParam = {
       'ignore',
       'focus',
       'off',
-    ],
-    anim: [
-      'off',
-      'on',
-      'ticket',
-      'savywanted',
-      'focus',
-      'ignore',
-      'typing',
-      'drive*',
-      'chat*',
-      'audio*',
-      'rollup',
-      'rolldown',
     ],
     react: [
       'look_up',
@@ -154,20 +140,12 @@ let storyTags = {
       'chargeshort',
       'chargelong',
     ],
-    linaHands: [
-      'checkwatch',
-      'lookcenter',
-      'lookleft',
-      'getfeelgrida',
-      'getfeelgridb',
-      'lookpax*',
-    ]
   }
 }
 
 // List of simple tags that are valid but don't have any params
 let simpleTags = {
-  tags: ['saveGame'],
+  tags: ['saveGame', 'enabled'],
   linter: (matchObject) => {return false; },  // pass through since there's no other processing
   needsParam: false,
   validParams: {}
@@ -212,9 +190,9 @@ let tagsWithoutEvents = {
      "fuelPreview",
      "distance",
      "setDestination",
-     "enabled",
-     "teleport"
-
+     "teleport",
+     "loc",
+     "timeline"
   ],
   validParams: {}
 };
